@@ -1,0 +1,46 @@
+name: CI Builds
+
+permissions:
+  contents: read
+
+on:
+  push:
+    branches: [kyria/meskill]
+
+concurrency: ci_build-${{ github.event.inputs.branch || github.ref_name }}
+
+jobs:
+  ci_build:
+    if: github.repository == 'meskill/qmk_firmware'
+    name: "CI Build kyria/meskill"
+    runs-on: ubuntu-latest
+    timeout-minutes: 1380
+
+    container: ghcr.io/qmk/qmk_cli
+
+    steps:
+    - name: Disable safe.directory check
+      run : git config --global --add safe.directory '*'
+
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+        ref: ${{ github.event.inputs.branch || github.ref }}
+
+    - name: Install dependencies
+      run: pip3 install -r requirements.txt
+
+    - name: Run `qmk compile`
+      run: |
+        qmk compile -kb splitkb/kyria/rev3 -km meskill
+
+    - name: 'Upload artifacts'
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: artifacts-kyria-meskill
+        if-no-files-found: ignore
+        path: |
+          *.uf2
+          .build/failed.*
+
