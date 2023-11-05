@@ -66,6 +66,7 @@ CMakeLists.txt
 .vscode/last.sql
 .vscode/launch.json
 .vscode/tasks.json
+.vscode/bookmarks.json
 .vscode/temp.sql
 tags
 
@@ -111,3 +112,7 @@ compile_commands.json
 # VIA(L) files that don't belong in QMK repo
 via*.json
 /keyboards/**/keymaps/vial/*
+
+# direnv
+.envrc
+.direnv

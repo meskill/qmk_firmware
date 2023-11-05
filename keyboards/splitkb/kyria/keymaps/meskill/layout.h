@@ -13,21 +13,24 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
+
+#pragma once
+
 #include QMK_KEYBOARD_H
 
-void post_process_record_rgb(uint16_t keycode, keyrecord_t *record);
+#define S_QST RSA(KC_SLSH)
+#define S_EXL LSFT(KC_1)
+#define S_CLN RSA(KC_SCLN)
+#define S_SCLN RALT(KC_SCLN)
+#define S_QOT RALT(KC_QUOT)
+#define S_DQOT RSA(KC_DQT)
+#define S_SLH RALT(KC_SLSH)
+#define S_BSLH KC_BSLS
+#define S_LBRC RALT(KC_LBRC)
+#define S_RBRC RALT(KC_RBRC)
+#define S_LCBR RALT(KC_LCBR)
+#define S_RCBR RALT(KC_RCBR)
+#define S_EUR RALT(KC_5)
 
-void keyboard_post_init_rgb(void);
-
-void layer_state_set_rgb(layer_state_t state);
-
-void housekeeping_task_rgb(void);
-
-#define SPLIT_RGBLED_NUM (RGBLED_NUM / 2)
-#define SPLIT_LED_LEFT(start, count, color) {start, count, color}
-#define SPLIT_LED_RIGHT(start, count, color) {SPLIT_RGBLED_NUM + (start % 2 == 0 ? SPLIT_RGBLED_NUM - 2 : SPLIT_RGBLED_NUM) - start - count + 1, count, color}
-
-#define SPLIT_LED_MIRROR(start, count, color) \
-  {start, count, color}, \
-  {SPLIT_RGBLED_NUM + (start % 2 == 0 ? SPLIT_RGBLED_NUM - 2 : SPLIT_RGBLED_NUM) - start - count + 1, count, color}
-
+#define SWTC_EN() tap_code16(LSA(KC_1))
+#define SWTC_RU() tap_code16(LSA(KC_2))

@@ -134,7 +134,37 @@ void layer_state_set_rgb(layer_state_t state) {
     }
 }
 
+static uint32_t rgb_timer;
+bool is_rgb_timeout = false;
+
+void refresh_rgb(void) {
+    rgb_timer = timer_read32();
+    if (is_rgb_timeout) {
+        is_rgb_timeout = false;
+        rgblight_wakeup();
+    }
+}
+
+void check_rgb_timeout(void) {
+    if (!is_rgb_timeout && timer_elapsed32(rgb_timer) > RGBLIGHT_TIMEOUT) {
+        rgblight_suspend();
+        is_rgb_timeout = true;
+    }
+}
+
+void housekeeping_task_rgb(void) {
+    #ifdef RGBLIGHT_TIMEOUT
+        check_rgb_timeout();
+    #endif
+}
+
 void post_process_record_rgb(uint16_t keycode, keyrecord_t *record) {
+    #ifdef RGBLIGHT_TIMEOUT
+        if (record->event.pressed) {
+            refresh_rgb();
+        }
+    #endif
+
     switch (keycode) {
         case QK_DEBUG_TOGGLE:
             rgblight_blink_layer_repeat(RGB_DBG, 200, debug_enable ? 3 : 1);
