@@ -20,7 +20,7 @@
 bool process_mod_tap(uint16_t keycode, keyrecord_t *record) {
     bool down = record->event.pressed;
     bool tap = down && record->tap.count > 0;
-    int mods = get_mods();
+    int mods = get_mods() | get_oneshot_mods();
 
     switch (keycode) {
         // mod-tap fix for media layer

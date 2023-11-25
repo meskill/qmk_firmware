@@ -17,13 +17,13 @@
 #include "tap_dance.h"
 
 // borrowed code from https://docs.qmk.fm/#/feature_tap_dance?id=introduction
-td_state_t cur_dance(tap_dance_state_t *state, bool interrupted_tap) {
-    bool interrupted = interrupted_tap && state->interrupted;
+td_state_t cur_dance(tap_dance_state_t *state) {
+    bool interrupted = state->interrupted;
 
     if (state->count == 1) {
-        if (interrupted || !state->pressed) return TD_SINGLE_TAP;
+        if (interrupted || state->pressed) return TD_SINGLE_HOLD;
         // Key has not been interrupted, but the key is still held. Means you want to send a 'HOLD'.
-        else return TD_SINGLE_HOLD;
+        else return TD_SINGLE_TAP;
     } else if (state->count == 2) {
         // TD_DOUBLE_SINGLE_TAP is to distinguish between typing "pepper", and actually wanting a double tap
         // action when hitting 'pp'. Suggested use case for this return value is when you want to send two
@@ -50,7 +50,14 @@ td_state_t cur_dance(tap_dance_state_t *state, bool interrupted_tap) {
 void sft_finished(tap_dance_state_t *state, void *user_data) {
     td_tap_t *tap_state = (td_tap_t *)user_data;
 
-    tap_state->state = cur_dance(state, false);
+    tap_state->state = cur_dance(state);
+
+    if (state->interrupted) {
+        if (IS_QK_LAYER_TAP(state->interrupting_keycode)) {
+            add_oneshot_mods(MOD_BIT(KC_LSFT));
+            return;
+        }
+    }
 
     switch (tap_state->state) {
         case TD_SINGLE_TAP: tap_code16(KC_LPRN); break;
@@ -73,7 +80,7 @@ void sft_reset(tap_dance_state_t *state, void *user_data) {
 void tt_nav_finished(tap_dance_state_t *state, void *user_data) {
     td_tap_t *tap_state = (td_tap_t *)user_data;
 
-    tap_state->state = cur_dance(state, false);
+    tap_state->state = cur_dance(state);
 
     switch (tap_state->state) {
         case TD_SINGLE_TAP: tap_code16(S_RBRC); break;
@@ -97,7 +104,7 @@ void tt_nav_reset(tap_dance_state_t *state, void *user_data) {
 void tt_sym_finished(tap_dance_state_t *state, void *user_data) {
     td_tap_t *tap_state = (td_tap_t *)user_data;
 
-    tap_state->state = cur_dance(state, false);
+    tap_state->state = cur_dance(state);
     tap_state->lang_ru = IS_LAYER_ON(RU);
 
     switch (tap_state->state) {
@@ -130,7 +137,7 @@ void tt_sym_reset(tap_dance_state_t *state, void *user_data) {
 }
 
 tap_dance_action_t tap_dance_actions[] = {
-    [TD_SFT_LPRN] = ACTION_TD(sft_finished, sft_reset),
+    [TD_SFT] = ACTION_TD(sft_finished, sft_reset),
     [TD_TT_NAV] = ACTION_TD(tt_nav_finished, tt_nav_reset),
     [TD_TT_SYM] = ACTION_TD(tt_sym_finished, tt_sym_reset)
 };

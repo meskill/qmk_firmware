@@ -21,7 +21,7 @@
 #include "macro.h"
 
 enum {
-    TD_SFT_LPRN,
+    TD_SFT,
     TD_TT_NAV,
     TD_TT_SYM
 };
@@ -43,4 +43,4 @@ typedef struct {
     td_state_t state;
 } td_tap_t;
 
-td_state_t cur_dance(tap_dance_state_t *state, bool interrupted_tap);
+td_state_t cur_dance(tap_dance_state_t *state);
