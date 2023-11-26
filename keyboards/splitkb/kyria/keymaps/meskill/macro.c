@@ -26,12 +26,7 @@ bool process_macro(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case SEND_I:
             if (down) {
-                SEND_STRING("I ");
-            }
-            break;
-        case SEND_I_A:
-            if (down) {
-                SEND_STRING("I'");
+                SEND_STRING("I");
             }
             break;
         case SEND_THE:

@@ -91,7 +91,6 @@ bool caps_word_press_user(uint16_t keycode) {
             }
 
             return false;
-        case SEND_I_A:
         case SEND_THE:
             return true;
 
@@ -122,7 +121,6 @@ bool lang_word_press_user(uint16_t keycode) {
         case RU_YO:
         case RU_E:
             return IS_LAYER_ON(RU);
-        case SEND_I_A:
         case SEND_THE:
             return true;
 
@@ -133,10 +131,10 @@ bool lang_word_press_user(uint16_t keycode) {
 
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case LALT_T(S_LCBR):
-        case LCTL_T(KC_LBRC):
+        case LALT_T(KC_LBRC):
+        case LCTL_T(KC_LPRN):
         case TD(TD_SFT):
-        case LGUI_T(KC_RPRN):
+        case LGUI_T(S_RCBR):
         case TD(TD_TT_NAV):
         case TD(TD_TT_SYM):
             // Immediately select the hold action when another key is pressed.

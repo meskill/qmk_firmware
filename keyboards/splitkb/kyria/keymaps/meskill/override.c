@@ -21,21 +21,21 @@ const key_override_t gamebar_record = ko_make_basic(MOD_MASK_GUI, LAG(KC_PSCR), 
 
 #define EN_ONL (1<<EN)
 
-const key_override_t colon_en = ko_make_with_layers(MOD_MASK_SHIFT, LT(WIN, KC_DOT), KC_COLN, EN_ONL);
-const key_override_t semicolon_en = ko_make_with_layers(MOD_MASK_SHIFT, LT(FN, KC_COMM), KC_SCLN, EN_ONL);
+const key_override_t colon_en = ko_make_with_layers(MOD_MASK_SHIFT, KC_DOT, KC_COLN, EN_ONL);
+const key_override_t semicolon_en = ko_make_with_layers(MOD_MASK_SHIFT, KC_COMM, KC_SCLN, EN_ONL);
 const key_override_t backslash_en = ko_make_with_layers(MOD_MASK_SHIFT, KC_SLSH, S_BSLH, EN_ONL);
 
 #define RU_ONL (1<<RU)
 
-const key_override_t colon_ru = ko_make_with_layers(MOD_MASK_SHIFT, LT(WIN, RU_DOT), S_CLN, RU_ONL);
-const key_override_t semicolon_ru = ko_make_with_layers(MOD_MASK_SHIFT, LT(FN, RU_COMM), S_SCLN, RU_ONL);
+const key_override_t colon_ru = ko_make_with_layers(MOD_MASK_SHIFT, RU_DOT, S_CLN, RU_ONL);
+const key_override_t semicolon_ru = ko_make_with_layers(MOD_MASK_SHIFT, RU_COMM, S_SCLN, RU_ONL);
 const key_override_t hardsign = ko_make_with_layers(MOD_MASK_SHIFT, RU_SOFT, RU_HARD, RU_ONL);
 const key_override_t backslash_ru = ko_make_with_layers(MOD_MASK_SHIFT, S_SLH, S_BSLH, RU_ONL);
 
 #define LANG EN_ONL | RU_ONL
 
 const key_override_t exclamation = ko_make_with_layers(MOD_MASK_SHIFT, LT(MDA, S_QST), S_EXL, LANG);
-const key_override_t quote = ko_make_with_layers(MOD_MASK_SHIFT, S_DQOT, S_QOT, LANG);
+const key_override_t quote = ko_make_with_layers(MOD_MASK_SHIFT, LT(FN, S_DQOT), S_QOT, LANG);
 
 // This globally defines all key overrides to be used
 const key_override_t **key_overrides = (const key_override_t *[]){

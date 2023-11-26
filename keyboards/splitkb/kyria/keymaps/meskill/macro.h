@@ -18,7 +18,6 @@
 
 enum custom_keycodes {
     SEND_I = SAFE_RANGE,
-    SEND_I_A,
     SEND_THE,
     SEND_TRGRV,
     SEND_ARR,

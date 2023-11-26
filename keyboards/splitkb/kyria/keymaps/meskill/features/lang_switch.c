@@ -34,16 +34,19 @@ bool process_lang_switch(uint16_t keycode, keyrecord_t *record) {
     }
 
     switch (keycode) {
-        case LCTL_T(S_LBRC):
-        case LGUI_T(KC_RPRN): {
+        case QK_MOD_TAP ... QK_MOD_TAP_MAX: {
             if (tap) {
                 return true;
             }
 
             uint16_t tap_mods = QK_MOD_TAP_GET_MODS(keycode);
 
+            if (!(tap_mods & (MOD_LCTL | MOD_LGUI))) {
+                return true;
+            }
+
             if (down) {
-                invert_lang_on_release = IS_LAYER_ON(RU);
+                invert_lang_on_release = IS_LAYER_ON(LANG_SWITCH_LAYER);
                 layer_off(LANG_SWITCH_LAYER);
                 register_mods(tap_mods);
             } else {

@@ -35,8 +35,7 @@ bool process_mod_tap(uint16_t keycode, keyrecord_t *record) {
             }
             break;
         // mod-tap fix for shift keycodes
-        case LSFT_T(KC_LPRN):
-        case LGUI_T(KC_RPRN): {
+        case LCTL_T(KC_LPRN): {
             if (tap) {
                 tap_code16(LSFT(QK_MOD_TAP_GET_TAP_KEYCODE(keycode)));
                 return false;
@@ -44,12 +43,12 @@ bool process_mod_tap(uint16_t keycode, keyrecord_t *record) {
 
             break;
         }
-        case LT(FN, RU_COMM): {
+        case LT(FN, S_DQOT): {
             if (tap) {
                 if (mods & MOD_MASK_SHIFT) {
                     break;
                 } else {
-                    tap_code16(RU_COMM);
+                    tap_code16(S_DQOT);
                 }
                 return false;
             }
@@ -57,24 +56,15 @@ bool process_mod_tap(uint16_t keycode, keyrecord_t *record) {
             break;
         }
         // mod-tap fix for ralt keycodes
-        case LT(NAV, S_RBRC): {
+        case LALT_T(S_LBRC): {
             if (tap) {
                 tap_code16(RALT(QK_MOD_TAP_GET_TAP_KEYCODE(keycode)));
                 return false;
             }
-            break;
-        }
-        case LCTL_T(S_LBRC): {
-            if (tap) {
-                tap_code16(RALT(QK_MOD_TAP_GET_TAP_KEYCODE(keycode)));
-                return false;
-            }
-
             break;
         }
         // mod-tap fix for shift+ralt keycodes
-        case LALT_T(S_LCBR):
-        case LT(SYM, S_RCBR): {
+        case LGUI_T(S_RCBR): {
             if (tap) {
                 tap_code16(LSFT(RALT(QK_MOD_TAP_GET_TAP_KEYCODE(keycode))));
                 return false;

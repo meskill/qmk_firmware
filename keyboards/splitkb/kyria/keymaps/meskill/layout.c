@@ -23,16 +23,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [EN] = LAYOUT(
       KC_ESC         ,  KC_Q  ,  KC_W  ,  KC_E  ,  KC_R  ,  KC_T  ,                                         KC_Y  ,  KC_U  ,  KC_I  ,  KC_O  , KC_P  ,  LT(MDA, S_QST)  ,
-      KC_MINS        ,  KC_A  ,  KC_S  ,  KC_D  ,  KC_F  ,  KC_G  ,                                         KC_H  ,  KC_J  ,  KC_K  ,  KC_L  , SEND_THE ,  S_DQOT ,
-      LT(WIN, KC_DOT),  KC_Z  ,  KC_X  ,  KC_C  ,  KC_V  ,  KC_B  ,  TG(GAME), MO(STP),           TO(EN),  LAG(KC_PSCR),  KC_N  ,  KC_M  ,  SEND_I ,  SEND_I_A , LT(FN, KC_COMM),  KC_SLSH  ,
-                        LALT_T(S_LCBR), LCTL_T(KC_LBRC), KC_SPC, TD(TD_SFT_LPRN),  KC_TAB,            KC_ENT, LGUI_T(KC_RPRN),  KC_BSPC,   TD(TD_TT_NAV), TD(TD_TT_SYM)
+      LT(WIN, KC_MINS)        ,  KC_A  ,  KC_S  ,  KC_D  ,  KC_F  ,  KC_G  ,                                         KC_H  ,  KC_J  ,  KC_K  ,  KC_L  , SEND_THE ,  LT(FN, S_DQOT) ,
+      KC_DOT,  KC_Z  ,  KC_X  ,  KC_C  ,  KC_V  ,  KC_B  ,  TG(GAME), MO(STP),           TO(EN),  LAG(KC_PSCR),  KC_N  ,  KC_M  ,  SEND_I ,  KC_QUOT , KC_COMM,  KC_SLSH  ,
+                        LALT_T(KC_LBRC), LCTL_T(KC_LPRN), KC_SPC, TD(TD_SFT),  KC_TAB,            KC_ENT, LGUI_T(S_RCBR),  KC_BSPC,   TD(TD_TT_NAV), TD(TD_TT_SYM)
     ),
 
 		[RU] = LAYOUT(
       _______  ,  RU_SHTI,  RU_TSE  ,  RU_U  ,  RU_KA ,  RU_IE ,                                         RU_EN  ,  RU_GHE ,  RU_SHA , RU_SHCH ,  RU_ZE  ,  _______  ,
       _______  ,  RU_EF  ,  RU_YERU ,  RU_VE ,  RU_A  ,  RU_PE ,                                         RU_ER  ,  RU_O   ,  RU_EL  , RU_DE   ,  RU_ZHE ,  _______ ,
-      LT(WIN, RU_DOT) ,  RU_YA  ,  RU_CHE  ,  RU_ES ,  RU_EM ,  RU_I  ,  _______, _______,        _______, _______ ,  RU_TE  ,  RU_SOFT,  RU_BE  , RU_YU   ,  LT(FN, RU_COMM) ,  S_SLH  ,
-                     _______, LCTL_T(S_LBRC),  _______, _______, _______,                 _______, LGUI_T(KC_RPRN), _______, _______, _______
+      RU_DOT ,  RU_YA  ,  RU_CHE  ,  RU_ES ,  RU_EM ,  RU_I  ,  _______, _______,        _______, _______ ,  RU_TE  ,  RU_SOFT,  RU_BE  , RU_YU   ,  RU_COMM ,  S_SLH  ,
+                     LALT_T(S_LBRC), _______,  _______, _______, _______,                 _______, _______, _______, _______, _______
     ),
 
 		[SYM] = LAYOUT(
@@ -50,16 +50,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [FN] = LAYOUT(
-      _______, _______, _______, _______, _______, _______,                                                 KC_F12, KC_F7, KC_F8, KC_F9, _______, _______ ,
-      _______, _______, _______, _______, _______, _______,                                                 KC_F11, KC_F4, KC_F5, KC_F6, _______, _______,
-      _______, _______, _______, _______, _______, _______, _______, _______,            _______, _______,  KC_F10, KC_F1, KC_F2, KC_F3, _______ , _______,
+      _______, _______, _______, _______, _______, _______,                                                 _______, KC_F7, KC_F8, KC_F9, KC_F10, _______ ,
+      _______, _______, _______, _______, _______, _______,                                                 _______, KC_F4, KC_F5, KC_F6, KC_F11, _______,
+      _______, _______, _______, _______, _______, _______, _______, _______,            _______, _______,  _______, KC_F1, KC_F2, KC_F3, KC_F12, _______,
                               _______, _______, _______, _______, _______,                              _______, _______, _______, _______, _______
     ),
 
     [WIN] = LAYOUT(
       _______, _______, _______, _______, _______, _______,                                                 _______, _______, _______, _______, _______, _______ ,
-      _______, _______, _______, _______, _______, _______,                                                 _______, _______, _______, _______, _______, _______,
-      _______, LGUI(KC_1), LGUI(KC_2), LGUI(KC_3), LGUI(KC_4), LGUI(KC_5), _______, _______,            _______, _______,  _______, _______, _______, _______, _______ , _______,
+      _______, LGUI(KC_1), LGUI(KC_2), LGUI(KC_3), LGUI(KC_4), LGUI(KC_5),                                               _______, _______, _______, _______, _______, _______,
+      _______, _______, _______, _______, _______, _______, _______, _______,            _______, _______,  _______, _______, _______, _______, _______ , _______,
                               _______, _______, _______, _______, _______,                              _______, _______, _______, _______, _______
     ),
 

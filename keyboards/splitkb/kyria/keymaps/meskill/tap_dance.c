@@ -60,7 +60,7 @@ void sft_finished(tap_dance_state_t *state, void *user_data) {
     }
 
     switch (tap_state->state) {
-        case TD_SINGLE_TAP: tap_code16(KC_LPRN); break;
+        case TD_SINGLE_TAP: tap_code16(S_LCBR); break;
         case TD_SINGLE_HOLD: register_code(KC_LSFT); break;
         case TD_DOUBLE_TAP: caps_word_toggle(); break;
         default: break;
@@ -83,7 +83,7 @@ void tt_nav_finished(tap_dance_state_t *state, void *user_data) {
     tap_state->state = cur_dance(state);
 
     switch (tap_state->state) {
-        case TD_SINGLE_TAP: tap_code16(S_RBRC); break;
+        case TD_SINGLE_TAP: tap_code16(KC_RPRN); break;
         case TD_SINGLE_HOLD:
         case TD_DOUBLE_TAP: layer_invert(NAV); break;
         default: break;
@@ -108,7 +108,7 @@ void tt_sym_finished(tap_dance_state_t *state, void *user_data) {
     tap_state->lang_ru = IS_LAYER_ON(RU);
 
     switch (tap_state->state) {
-        case TD_SINGLE_TAP: tap_code16(S_RCBR); break;
+        case TD_SINGLE_TAP: tap_code16(S_RBRC); break;
         case TD_SINGLE_HOLD:
         case TD_DOUBLE_TAP:
             if (tap_state->lang_ru) {
