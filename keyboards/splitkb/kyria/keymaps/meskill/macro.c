@@ -40,9 +40,12 @@ bool process_macro(uint16_t keycode, keyrecord_t *record) {
                 }
             }
             break;
-        case SEND_TRGRV:
-            if (down) {
+        case KC_GRV:
+            if (down && is_shift) {
+                del_mods(mods);
                 SEND_STRING("```");
+                add_mods(mods);
+                return false;
             }
             break;
         case SEND_ARR:
