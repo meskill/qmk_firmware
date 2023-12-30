@@ -122,6 +122,8 @@ bool lang_word_press_user(uint16_t keycode) {
         case KC_A ... KC_Z:
         case KC_MINS ... KC_SLASH:
         case KC_1 ... KC_0:
+        case KC_LEFT:
+        case KC_RIGHT:
             return true;
     }
 
