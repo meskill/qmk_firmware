@@ -91,6 +91,7 @@ bool caps_word_press_user(uint16_t keycode) {
             }
 
             return false;
+        case SEND_I:
         case SEND_THE:
             return true;
 
@@ -101,32 +102,30 @@ bool caps_word_press_user(uint16_t keycode) {
 
 bool lang_word_press_user(uint16_t keycode) {
     dprintf("lang_word_press_user code: %x\n", keycode);
+
     switch (keycode) {
-        // Keycodes that continue Lang Word
-        case KC_A ... KC_Z:
-        case KC_MINS:
-        case KC_1 ... KC_0:
         case KC_BSPC:
         case KC_DEL:
         case KC_UNDS:
         case KC_LSFT:
         case KC_RSFT:
+        case S_SLH:
         case QK_TAP_DANCE ... QK_TAP_DANCE_MAX:
             return true;
-        case RU_BE:
-        case RU_YU:
-        case RU_HA:
-        case RU_HARD:
-        case RU_ZHE:
-        case RU_YO:
-        case RU_E:
-            return IS_LAYER_ON(RU);
+        case SEND_I:
         case SEND_THE:
             return true;
-
-        default:
-            return false;
     }
+
+    switch (QK_MODS_GET_BASIC_KEYCODE(keycode)) {
+        // Keycodes that continue Lang Word
+        case KC_A ... KC_Z:
+        case KC_MINS ... KC_SLASH:
+        case KC_1 ... KC_0:
+            return true;
+    }
+
+    return false;
 }
 
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
@@ -146,6 +145,7 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
 }
 
 void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
+    post_process_lang_word(keycode, record);
     post_process_record_rgb(keycode, record);
 }
 

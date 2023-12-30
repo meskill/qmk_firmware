@@ -95,13 +95,13 @@ bool process_lang_word(uint16_t keycode, keyrecord_t* record) {
 #endif // SWAP_HANDS_ENABLE
     }
 
-    if (lang_word_press_user(keycode)) {
-        send_keyboard_report();
-        return true;
-    }
-
-    lang_word_off();
     return true;
+}
+
+void post_process_lang_word(uint16_t keycode, keyrecord_t* record) {
+    if (!lang_word_press_user(keycode)) {
+        lang_word_off();
+    }
 }
 
 __attribute__((weak)) bool lang_word_press_user(uint16_t keycode) {

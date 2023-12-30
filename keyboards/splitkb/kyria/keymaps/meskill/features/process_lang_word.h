@@ -31,6 +31,16 @@
 bool process_lang_word(uint16_t keycode, keyrecord_t* record);
 
 /**
+ * @brief Post-rocess handler for Lang Word feature.
+ *
+ * @param keycode  Keycode registered by matrix press, per keymap
+ * @param record   keyrecord_t structure
+ * @return true    Continue processing keycodes, and send to host
+ * @return false   Stop processing keycodes, and don't send to host
+ */
+void post_process_lang_word(uint16_t keycode, keyrecord_t* record);
+
+/**
  * @brief Weak function for user-level Lang Word press modification.
  *
  * @param keycode   Keycode registered by matrix press, per keymap
