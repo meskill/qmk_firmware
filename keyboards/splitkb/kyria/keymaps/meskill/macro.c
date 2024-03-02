@@ -24,6 +24,12 @@ bool process_macro(uint16_t keycode, keyrecord_t *record) {
     bool is_shift = mods & MOD_MASK_SHIFT;
 
     switch (keycode) {
+        case RESET_STATE:
+            if (down) {
+                layer_move(0);
+                SWTC_EN();
+            }
+            break;
         case SEND_I:
             if (down) {
                 SEND_STRING("I");

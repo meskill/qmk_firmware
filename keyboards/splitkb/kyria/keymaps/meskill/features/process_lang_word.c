@@ -100,6 +100,7 @@ bool process_lang_word(uint16_t keycode, keyrecord_t* record) {
 
 void post_process_lang_word(uint16_t keycode, keyrecord_t* record) {
     if (!lang_word_press_user(keycode)) {
+        dprintf("disable lang_word by lang_word_press_user code: %x\n", keycode);
         lang_word_off();
     }
 }

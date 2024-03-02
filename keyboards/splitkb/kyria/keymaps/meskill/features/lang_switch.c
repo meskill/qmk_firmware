@@ -17,7 +17,6 @@
 #include "lang_switch.h"
 #include "debug.h"
 
-static bool is_lang_activated = false;
 static bool invert_lang_on_release = false;
 static uint32_t timer = 0;
 
@@ -29,9 +28,7 @@ bool process_lang_switch(uint16_t keycode, keyrecord_t *record) {
     bool down = record->event.pressed;
     bool tap = down && record->tap.count > 0;
 
-    if (is_lang_activated) {
-        reset_timer();
-    }
+    reset_timer();
 
     switch (keycode) {
         case QK_MOD_TAP ... QK_MOD_TAP_MAX: {
@@ -65,20 +62,10 @@ bool process_lang_switch(uint16_t keycode, keyrecord_t *record) {
 }
 
 void lang_switch_task(void) {
-    if (is_lang_activated && timer_expired32(timer_read32(), timer)) {
+    if (timer_expired32(timer_read32(), timer)) {
         dprint("lang_switch_timer expired\n");
-        layer_invert(LANG_SWITCH_LAYER);
-        lang_switch_stop();
+        layer_move(0);
+        SWTC_EN();
+        reset_timer();
     }
-}
-
-void lang_switch_start(void) {
-    dprint("lang_switch_start\n");
-    reset_timer();
-    is_lang_activated = true;
-}
-
-void lang_switch_stop(void) {
-    dprint("lang_switch_stop\n");
-    is_lang_activated = false;
 }

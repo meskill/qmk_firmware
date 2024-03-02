@@ -17,7 +17,8 @@
 #pragma once
 
 enum custom_keycodes {
-    SEND_I = SAFE_RANGE,
+    RESET_STATE = SAFE_RANGE,
+    SEND_I,
     SEND_THE,
     SEND_TRGRV,
     SEND_ARR,

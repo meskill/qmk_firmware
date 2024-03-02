@@ -169,7 +169,7 @@ void post_process_record_rgb(uint16_t keycode, keyrecord_t *record) {
         case QK_DEBUG_TOGGLE:
             rgblight_blink_layer_repeat(RGB_DBG, 200, debug_enable ? 3 : 1);
             break;
-        case TO(EN):
+        case RESET_STATE:
             rgblight_blink_layer_repeat(RGB_RESET, 200, 3);
             break;
     }

@@ -26,7 +26,3 @@
 bool process_lang_switch(uint16_t keycode, keyrecord_t *record);
 
 void lang_switch_task(void);
-
-void lang_switch_start(void);
-
-void lang_switch_stop(void);

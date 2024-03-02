@@ -14,6 +14,7 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 #include QMK_KEYBOARD_H
+#include "macro.h"
 
 void post_process_record_rgb(uint16_t keycode, keyrecord_t *record);
 

@@ -52,19 +52,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false;
     }
 
-    switch (keycode) {
-        case TO(EN):
-            // force reset to en layout in keyboard and OS
-            SWTC_EN();
-            lang_switch_stop();
-            break;
-    }
-
     return true;
 }
 
 bool caps_word_press_user(uint16_t keycode) {
-    dprintf("caps_word_press_user code: %x\n", keycode);
     switch (keycode) {
         // Keycodes that continue Caps Word, with shift applied.
         case KC_A ... KC_Z:
@@ -101,8 +92,6 @@ bool caps_word_press_user(uint16_t keycode) {
 }
 
 bool lang_word_press_user(uint16_t keycode) {
-    dprintf("lang_word_press_user code: %x\n", keycode);
-
     switch (keycode) {
         case KC_BSPC:
         case KC_DEL:
@@ -158,10 +147,8 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 
     if (is_ru_prev && !is_ru) {
         SWTC_EN();
-        lang_switch_stop();
     } else if (!is_ru_prev && is_ru) {
         SWTC_RU();
-        lang_switch_start();
     } else if (is_ru && (layer == SYM || layer == GAME)) {
         SWTC_EN();
     }
