@@ -189,7 +189,8 @@ void protocol_pre_task(void) {
             /* Do this in the suspended state */
             suspend_power_down(); // on AVR this deep sleeps for 15ms
             /* Remote wakeup */
-            if ((USB_DRIVER.status & USB_GETSTATUS_REMOTE_WAKEUP_ENABLED) && suspend_wakeup_condition()) {
+            // fix suggested by https://github.com/qmk/qmk_firmware/issues/22269#issuecomment-1807105115
+            if (suspend_wakeup_condition() && (USB_DRIVER.status & USB_GETSTATUS_REMOTE_WAKEUP_ENABLED)) {
                 usbWakeupHost(&USB_DRIVER);
                 restart_usb_driver(&USB_DRIVER);
             }
