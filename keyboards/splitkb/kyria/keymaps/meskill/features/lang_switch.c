@@ -17,7 +17,6 @@
 #include "lang_switch.h"
 #include "debug.h"
 
-static bool invert_lang_on_release = false;
 static uint32_t timer = 0;
 
 void reset_timer(void) {
@@ -26,36 +25,24 @@ void reset_timer(void) {
 
 bool process_lang_switch(uint16_t keycode, keyrecord_t *record) {
     bool down = record->event.pressed;
-    bool tap = down && record->tap.count > 0;
+    int mods = get_mods() | get_oneshot_mods();
 
     reset_timer();
 
-    switch (keycode) {
-        case QK_MOD_TAP ... QK_MOD_TAP_MAX: {
-            if (tap) {
-                return true;
-            }
+    if (!layer_state_cmp(layer_state, LANG_SWITCH_LAYER) || !mods || mods & MOD_MASK_SHIFT) {
+        return true;
+    }
 
-            uint16_t tap_mods = QK_MOD_TAP_GET_MODS(keycode);
+    uint16_t zero_layer_keycode = keymap_key_to_keycode(0, record->event.key);
 
-            if (!(tap_mods & (MOD_LCTL | MOD_LGUI))) {
-                return true;
-            }
-
-            if (down) {
-                invert_lang_on_release = IS_LAYER_ON(LANG_SWITCH_LAYER);
-                layer_off(LANG_SWITCH_LAYER);
-                register_mods(tap_mods);
-            } else {
-                unregister_mods(tap_mods);
-
-                if (invert_lang_on_release) {
-                    layer_on(LANG_SWITCH_LAYER);
-                }
-            }
-
-            return false;
+    if (keycode != zero_layer_keycode) {
+        if (down) {
+            register_code(zero_layer_keycode);
+        } else {
+            unregister_code(zero_layer_keycode);
         }
+
+        return false;
     }
 
     return true;
