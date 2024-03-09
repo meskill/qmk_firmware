@@ -60,7 +60,7 @@ bool caps_word_press_user(uint16_t keycode) {
         // Keycodes that continue Caps Word, with shift applied.
         case KC_A ... KC_Z:
         case KC_MINS:
-            add_weak_mods(MOD_BIT(KC_LSFT));  // Apply shift to next key.
+            add_weak_mods(MOD_BIT_LSHIFT);  // Apply shift to next key.
             return true;
 
         // Keycodes that continue Caps Word, without shifting.
@@ -77,7 +77,7 @@ bool caps_word_press_user(uint16_t keycode) {
         case RU_YO:
         case RU_E:
             if (IS_LAYER_ON(RU)) {
-                add_weak_mods(MOD_BIT(KC_LSFT));
+                add_weak_mods(MOD_BIT_LSHIFT);
                 return true;
             }
 

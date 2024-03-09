@@ -16,63 +16,59 @@
 
 #include "mod_tap.h"
 #include "keymap_russian.h"
+#include "tap_dance.h"
 
 bool process_mod_tap(uint16_t keycode, keyrecord_t *record) {
     bool down = record->event.pressed;
-    bool tap = down && record->tap.count > 0;
-    int mods = get_mods() | get_oneshot_mods();
+    bool tap = record->tap.count > 0;
+    int mods = get_mods() | get_oneshot_mods() | get_dance_mods();
+
+    if (!tap) return true;
+
+    uint16_t code = 0;
 
     switch (keycode) {
-        // mod-tap fix for media layer
-        case LT(MDA, S_QST):
-            if (tap) {
-                if (mods & MOD_MASK_SHIFT) {
-                    tap_code16(S_EXL);
-                } else {
-                    tap_code16(S_QST);
-                }
-                return false;
-            }
+        case LT(WIN, KC_MINS):
+            // need custom check for caps word since we override behavior of key
+            // here and without this we will register `-` instead of `_`
+            // because mods for caps_word are registered later
+            code = (mods & MOD_MASK_SHIFT) || is_caps_word_on() ? KC_UNDS : KC_MINS;
             break;
-        // mod-tap fix for shift keycodes
-        case LCTL_T(KC_LPRN): {
-            if (tap) {
-                tap_code16(LSFT(QK_MOD_TAP_GET_TAP_KEYCODE(keycode)));
-                return false;
-            }
-
+        case LT(MDA, S_QST): {
+            code = mods & MOD_MASK_SHIFT ? S_EXL : S_QST;
             break;
         }
         case LT(FN, S_DQOT): {
-            if (tap) {
-                if (mods & MOD_MASK_SHIFT) {
-                    break;
-                } else {
-                    tap_code16(S_DQOT);
-                }
-                return false;
+            if (mods & MOD_MASK_SHIFT) {
+                // call default behavior that will ignore SHIFT
+                // due to caveats but that's exactly what we need
+                return true;
             }
 
+            code = S_DQOT;
+            break;
+        }
+        // mod-tap fix for shift keycodes
+        case LCTL_T(KC_LPRN): {
+            code = LSFT(QK_MOD_TAP_GET_TAP_KEYCODE(keycode));
             break;
         }
         // mod-tap fix for ralt keycodes
         case LALT_T(S_LBRC): {
-            if (tap) {
-                tap_code16(RALT(QK_MOD_TAP_GET_TAP_KEYCODE(keycode)));
-                return false;
-            }
+            code = RALT(QK_MOD_TAP_GET_TAP_KEYCODE(keycode));
             break;
         }
         // mod-tap fix for shift+ralt keycodes
         case LGUI_T(S_RCBR): {
-            if (tap) {
-                tap_code16(LSFT(RALT(QK_MOD_TAP_GET_TAP_KEYCODE(keycode))));
-                return false;
-            }
-
+            code = LSFT(RALT(QK_MOD_TAP_GET_TAP_KEYCODE(keycode)));
             break;
         }
+        default:
+            return true;
     }
 
-    return true;
+    if (down) register_code16(code);
+    else unregister_code16(code);
+
+    return false;
 }

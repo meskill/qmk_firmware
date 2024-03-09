@@ -44,3 +44,5 @@ typedef struct {
 } td_tap_t;
 
 td_state_t cur_dance(tap_dance_state_t *state);
+
+uint8_t get_dance_mods(void);

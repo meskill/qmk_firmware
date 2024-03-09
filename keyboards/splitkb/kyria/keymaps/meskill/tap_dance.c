@@ -16,6 +16,13 @@
 
 #include "tap_dance.h"
 
+static uint32_t timer = 0;
+static uint8_t dance_mods = 0;
+
+void reset_dance_timer(void) {
+    timer = timer_read32() + TAPPING_TERM;
+}
+
 // borrowed code from https://docs.qmk.fm/#/feature_tap_dance?id=introduction
 td_state_t cur_dance(tap_dance_state_t *state) {
     bool interrupted = state->interrupted;
@@ -54,6 +61,8 @@ void sft_finished(tap_dance_state_t *state, void *user_data) {
 
     if (state->interrupted) {
         if (IS_QK_LAYER_TAP(state->interrupting_keycode)) {
+            // adding oneshot mods since for QK_LAYER_TAP keys actual tap could be registered
+            // later after the SHIFT key is already released breaking original intention
             add_oneshot_mods(MOD_BIT(KC_LSFT));
             return;
         }
@@ -63,6 +72,7 @@ void sft_finished(tap_dance_state_t *state, void *user_data) {
         case TD_SINGLE_TAP: tap_code16(S_LCBR); break;
         case TD_SINGLE_HOLD: register_code(KC_LSFT); break;
         case TD_DOUBLE_TAP: caps_word_toggle(); break;
+        case TD_DOUBLE_HOLD: register_code16(S_LCBR); break;
         default: break;
     }
 }
@@ -71,7 +81,12 @@ void sft_reset(tap_dance_state_t *state, void *user_data) {
     td_tap_t *tap_state = (td_tap_t *)user_data;
 
     switch (tap_state->state) {
-        case TD_SINGLE_HOLD: unregister_code(KC_LSFT); break;
+        case TD_SINGLE_HOLD:
+            dance_mods = MOD_MASK_SHIFT;
+            unregister_code(KC_LSFT);
+            reset_dance_timer();
+            break;
+        case TD_DOUBLE_HOLD: unregister_code16(S_LCBR); break;
         default: break;
     }
     tap_state->state = TD_NONE;
@@ -141,3 +156,12 @@ tap_dance_action_t tap_dance_actions[] = {
     [TD_TT_NAV] = ACTION_TD(tt_nav_finished, tt_nav_reset),
     [TD_TT_SYM] = ACTION_TD(tt_sym_finished, tt_sym_reset)
 };
+
+
+uint8_t get_dance_mods(void) {
+    if (timer_expired32(timer_read32(), timer)) {
+        dance_mods = 0;
+    }
+
+    return dance_mods;
+}

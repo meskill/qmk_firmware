@@ -19,7 +19,7 @@
 
 static uint32_t timer = 0;
 
-void reset_timer(void) {
+void reset_lang_switch_timer(void) {
     timer = timer_read32() + LANG_SWITCH_TIMEOUT;
 }
 
@@ -27,7 +27,7 @@ bool process_lang_switch(uint16_t keycode, keyrecord_t *record) {
     bool down = record->event.pressed;
     int mods = get_mods() | get_oneshot_mods();
 
-    reset_timer();
+    reset_lang_switch_timer();
 
     if (!layer_state_cmp(layer_state, LANG_SWITCH_LAYER) || !mods || mods & MOD_MASK_SHIFT) {
         return true;
@@ -53,6 +53,6 @@ void lang_switch_task(void) {
         dprint("lang_switch_timer expired\n");
         layer_move(0);
         SWTC_EN();
-        reset_timer();
+        reset_lang_switch_timer();
     }
 }
