@@ -49,7 +49,8 @@ bool process_mod_tap(uint16_t keycode, keyrecord_t *record) {
             break;
         }
         // mod-tap fix for shift keycodes
-        case LCTL_T(KC_LPRN): {
+        case LCTL_T(KC_LPRN):
+        case LT(NAV, KC_RPRN): {
             code = LSFT(QK_MOD_TAP_GET_TAP_KEYCODE(keycode));
             break;
         }

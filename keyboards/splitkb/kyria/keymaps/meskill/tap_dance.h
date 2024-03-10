@@ -22,8 +22,6 @@
 
 enum {
     TD_SFT,
-    TD_TT_NAV,
-    TD_TT_SYM
 };
 
 typedef enum {

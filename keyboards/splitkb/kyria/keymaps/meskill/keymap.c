@@ -125,8 +125,8 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
         case LCTL_T(KC_LPRN):
         case TD(TD_SFT):
         case LGUI_T(S_RCBR):
-        case TD(TD_TT_NAV):
-        case TD(TD_TT_SYM):
+        case LT(NAV, KC_RPRN):
+        case LT(SYM, S_RBRC):
             // Immediately select the hold action when another key is pressed.
             return true;
         default:
@@ -147,10 +147,12 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 
     if (is_ru_prev && !is_ru) {
         SWTC_EN();
-    } else if (!is_ru_prev && is_ru) {
-        SWTC_RU();
-    } else if (is_ru && (layer == SYM || layer == GAME)) {
-        SWTC_EN();
+    } else if (is_ru) {
+        if (layer == SYM || layer == GAME) {
+            SWTC_EN();
+        } else {
+            SWTC_RU();
+        }
     }
 
     layer_state_set_rgb(state);
@@ -163,5 +165,6 @@ void housekeeping_task_user(void) {
 }
 
 void suspend_wakeup_init_user(void) {
-    tap_code16(TO(EN));
+    layer_move(0);
+    SWTC_EN();
 }

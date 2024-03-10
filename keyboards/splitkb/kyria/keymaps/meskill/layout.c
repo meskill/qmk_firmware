@@ -25,7 +25,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_ESC         ,  KC_Q  ,  KC_W  ,  KC_E  ,  KC_R  ,  KC_T  ,                                         KC_Y  ,  KC_U  ,  KC_I  ,  KC_O  , KC_P  ,  LT(MDA, S_QST)  ,
       LT(WIN, KC_MINS)        ,  KC_A  ,  KC_S  ,  KC_D  ,  KC_F  ,  KC_G  ,                                         KC_H  ,  KC_J  ,  KC_K  ,  KC_L  , SEND_THE ,  LT(FN, S_DQOT) ,
       KC_DOT,  KC_Z  ,  KC_X  ,  KC_C  ,  KC_V  ,  KC_B  ,  TO(GAME), MO(STP),           RESET_STATE,  LAG(KC_PSCR),  KC_N  ,  KC_M  ,  SEND_I ,  KC_QUOT , KC_COMM,  KC_SLSH  ,
-                        LALT_T(KC_LBRC), LCTL_T(KC_LPRN), KC_SPC, TD(TD_SFT),  KC_TAB,            KC_ENT, LGUI_T(S_RCBR),  KC_BSPC,   TD(TD_TT_NAV), TD(TD_TT_SYM)
+                        LALT_T(KC_LBRC), LCTL_T(KC_LPRN), KC_SPC, TD(TD_SFT),  KC_TAB,            KC_ENT, LGUI_T(S_RCBR),  KC_BSPC,   LT(NAV, KC_RPRN), LT(SYM, S_RBRC)
     ),
 
 		[RU] = LAYOUT(
@@ -81,7 +81,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       QK_BOOT, QK_CLEAR_EEPROM, _______, _______, _______, _______,                                              _______, _______, _______, _______, _______, _______,
       _______, _______, _______, _______, _______, _______,                                              RGB_TOG, RGB_SAI, RGB_HUI, RGB_VAI, RGB_MOD, _______,
       DB_TOGG, _______, _______, _______, _______, _______, _______, _______,           _______, _______, _______, RGB_SAD, RGB_HUD, RGB_VAD, RGB_RMOD, _______,
-                                _______, _______, _______, _______, _______,             _______, _______, _______, _______, _______
+                                _______, _______, _______, _______, _______,             _______, _______, _______, TG(NAV), TG(SYM)
     )
 
 //  /*

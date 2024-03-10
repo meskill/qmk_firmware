@@ -92,69 +92,8 @@ void sft_reset(tap_dance_state_t *state, void *user_data) {
     tap_state->state = TD_NONE;
 }
 
-void tt_nav_finished(tap_dance_state_t *state, void *user_data) {
-    td_tap_t *tap_state = (td_tap_t *)user_data;
-
-    tap_state->state = cur_dance(state);
-
-    switch (tap_state->state) {
-        case TD_SINGLE_TAP: tap_code16(KC_RPRN); break;
-        case TD_SINGLE_HOLD:
-        case TD_DOUBLE_TAP: layer_invert(NAV); break;
-        default: break;
-    }
-
-}
-
-void tt_nav_reset(tap_dance_state_t *state, void *user_data) {
-    td_tap_t *tap_state = (td_tap_t *)user_data;
-
-    switch (tap_state->state) {
-        case TD_SINGLE_HOLD: layer_invert(NAV); break;
-        default: break;
-    }
-    tap_state->state = TD_NONE;
-}
-
-void tt_sym_finished(tap_dance_state_t *state, void *user_data) {
-    td_tap_t *tap_state = (td_tap_t *)user_data;
-
-    tap_state->state = cur_dance(state);
-    tap_state->lang_ru = IS_LAYER_ON(RU);
-
-    switch (tap_state->state) {
-        case TD_SINGLE_TAP: tap_code16(S_RBRC); break;
-        case TD_SINGLE_HOLD:
-        case TD_DOUBLE_TAP:
-            if (tap_state->lang_ru) {
-                layer_invert(RU);
-            }
-            layer_invert(SYM);
-            break;
-        default: break;
-    }
-
-}
-
-void tt_sym_reset(tap_dance_state_t *state, void *user_data) {
-    td_tap_t *tap_state = (td_tap_t *)user_data;
-
-    switch (tap_state->state) {
-        case TD_SINGLE_HOLD:
-            if (tap_state->lang_ru) {
-                layer_invert(RU);
-            }
-            layer_invert(SYM);
-            break;
-        default: break;
-    }
-    tap_state->state = TD_NONE;
-}
-
 tap_dance_action_t tap_dance_actions[] = {
     [TD_SFT] = ACTION_TD(sft_finished, sft_reset),
-    [TD_TT_NAV] = ACTION_TD(tt_nav_finished, tt_nav_reset),
-    [TD_TT_SYM] = ACTION_TD(tt_sym_finished, tt_sym_reset)
 };
 
 

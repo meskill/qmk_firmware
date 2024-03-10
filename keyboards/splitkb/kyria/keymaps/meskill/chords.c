@@ -20,7 +20,7 @@
 #include "macro.h"
 #include "tap_dance.h"
 
-const uint16_t PROGMEM ru_layer[] = {LALT_T(S_LCBR), TD(TD_TT_SYM), COMBO_END};
+const uint16_t PROGMEM ru_layer[] = {LALT_T(S_LCBR), LT(SYM, S_RBRC), COMBO_END};
 const uint16_t PROGMEM ru_layer_word[] = {KC_SPC, KC_BSPC, COMBO_END};
 const uint16_t PROGMEM ru_yo[] = {RU_SHTI, RU_A, COMBO_END};
 const uint16_t PROGMEM ru_ha[] = {RU_ZE, RU_O, COMBO_END};
