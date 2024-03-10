@@ -59,15 +59,6 @@ void sft_finished(tap_dance_state_t *state, void *user_data) {
 
     tap_state->state = cur_dance(state);
 
-    if (state->interrupted) {
-        if (IS_QK_LAYER_TAP(state->interrupting_keycode)) {
-            // adding oneshot mods since for QK_LAYER_TAP keys actual tap could be registered
-            // later after the SHIFT key is already released breaking original intention
-            add_oneshot_mods(MOD_BIT(KC_LSFT));
-            return;
-        }
-    }
-
     switch (tap_state->state) {
         case TD_SINGLE_TAP: tap_code16(S_LCBR); break;
         case TD_SINGLE_HOLD: register_code(KC_LSFT); break;

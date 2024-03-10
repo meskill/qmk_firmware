@@ -35,7 +35,7 @@ bool process_mod_tap(uint16_t keycode, keyrecord_t *record) {
             code = (mods & MOD_MASK_SHIFT) || is_caps_word_on() ? KC_UNDS : KC_MINS;
             break;
         case LT(MDA, S_QST): {
-            code = mods & MOD_MASK_SHIFT ? S_EXL : S_QST;
+            code = (mods & MOD_MASK_SHIFT) ? S_EXL : S_QST;
             break;
         }
         case LT(FN, S_DQOT): {

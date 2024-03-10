@@ -33,7 +33,6 @@ const key_override_t backslash_ru = ko_make_with_layers(MOD_MASK_SHIFT, S_SLH, S
 
 #define LANG EN_ONL | RU_ONL
 
-const key_override_t exclamation = ko_make_with_layers(MOD_MASK_SHIFT, LT(MDA, S_QST), S_EXL, LANG);
 const key_override_t quote = ko_make_with_layers(MOD_MASK_SHIFT, LT(FN, S_DQOT), S_QOT, LANG);
 
 // This globally defines all key overrides to be used
@@ -46,7 +45,6 @@ const key_override_t **key_overrides = (const key_override_t *[]){
     &hardsign,
     &backslash_en,
     &backslash_ru,
-    &exclamation,
     &quote,
     NULL // Null terminate the array of overrides!
 };
