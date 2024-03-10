@@ -23,55 +23,46 @@ bool process_macro(uint16_t keycode, keyrecord_t *record) {
     int mods = get_mods();
     bool is_shift = mods & MOD_MASK_SHIFT;
 
+    if (!down) return true;
+
     switch (keycode) {
         case RESET_STATE:
-            if (down) {
-                layer_move(0);
-                SWTC_EN();
-            }
-            break;
+            layer_move(0);
+            SWTC_EN();
+            return false;
         case SEND_I:
-            if (down) {
-                SEND_STRING("I");
-            }
-            break;
+            SEND_STRING("I");
+            return false;
         case SEND_THE:
-            if (down) {
-                if (is_caps_word_on()) {
-                    SEND_STRING("THE");
-                } else if (is_shift) {
-                    SEND_STRING("The");
-                } else {
-                    SEND_STRING("the");
-                }
+            if (is_caps_word_on()) {
+                SEND_STRING("THE");
+            } else if (is_shift) {
+                SEND_STRING("The");
+            } else {
+                SEND_STRING("the");
             }
-            break;
+            return false;
         case KC_GRV:
-            if (down && is_shift) {
+            if (is_shift) {
                 del_mods(mods);
                 SEND_STRING("```");
                 add_mods(mods);
                 return false;
             }
-            break;
+            return true;
         case SEND_ARR:
-            if (down) {
-                if (is_shift) {
-                    del_mods(mods);
-                    SEND_STRING("=>");
-                    add_mods(mods);
-                } else {
-                    SEND_STRING("->");
-                }
+            if (is_shift) {
+                del_mods(mods);
+                SEND_STRING("=>");
+                add_mods(mods);
+            } else {
+                SEND_STRING("->");
             }
-            break;
-        case SEND_TBFH: {
-            if (down) {
-                SEND_STRING("::<>");
-                tap_code16(KC_LEFT);
-            }
-            break;
-        }
+            return false;
+        case SEND_TBFH:
+            SEND_STRING("::<>");
+            tap_code16(KC_LEFT);
+            return false;
     }
 
     return true;
