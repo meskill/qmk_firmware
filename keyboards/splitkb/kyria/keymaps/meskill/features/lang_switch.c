@@ -28,8 +28,9 @@ bool process_lang_switch(uint16_t keycode, keyrecord_t *record) {
     int mods = get_mods() | get_oneshot_mods();
 
     reset_lang_switch_timer();
+    uint16_t lang_layer_keycode = keymap_key_to_keycode(LANG_SWITCH_LAYER, record->event.key);
 
-    if (!layer_state_cmp(layer_state, LANG_SWITCH_LAYER) || !mods || mods & MOD_MASK_SHIFT) {
+    if (keycode != lang_layer_keycode || !mods || mods & MOD_MASK_SHIFT) {
         return true;
     }
 

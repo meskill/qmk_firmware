@@ -55,7 +55,8 @@ bool process_mod_tap(uint16_t keycode, keyrecord_t *record) {
             break;
         }
         // mod-tap fix for ralt keycodes
-        case LALT_T(S_LBRC): {
+        case LALT_T(S_LBRC):
+        case LT(SYM, S_RBRC): {
             code = RALT(QK_MOD_TAP_GET_TAP_KEYCODE(keycode));
             break;
         }
