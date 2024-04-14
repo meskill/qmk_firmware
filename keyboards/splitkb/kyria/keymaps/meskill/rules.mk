@@ -3,6 +3,7 @@ SRC += features/process_lang_word.c
 SRC += features/lang_switch.c
 SRC += macro.c
 SRC += mod_tap.c
+SRC += mod_hold.c
 SRC += tap_dance.c
 SRC += rgb.c
 

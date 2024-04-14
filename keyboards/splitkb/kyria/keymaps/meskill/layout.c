@@ -23,7 +23,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [EN] = LAYOUT(
       KC_ESC         ,  KC_Q  ,  KC_W  ,  KC_E  ,  KC_R  ,  KC_T  ,                                         KC_Y  ,  KC_U  ,  KC_I  ,  KC_O  , KC_P  ,  LT(MDA, S_QST)  ,
-      LT(WIN, KC_MINS)        ,  KC_A  ,  KC_S  ,  KC_D  ,  KC_F  ,  KC_G  ,                                         KC_H  ,  KC_J  ,  KC_K  ,  KC_L  , SEND_THE ,  LT(FN, S_DQOT) ,
+      LT(WIN, KC_MINS),  KC_A  ,  KC_S  ,  KC_D  ,  KC_F  ,  KC_G  ,                                         KC_H  ,  KC_J  ,  KC_K  ,  KC_L  , SEND_THE ,  LT(FN, S_DQOT) ,
       KC_DOT,  KC_Z  ,  KC_X  ,  KC_C  ,  KC_V  ,  KC_B  ,  KC_APP, MO(STP),           MO(STP),  LAG(KC_PSCR),  KC_N  ,  KC_M  ,  SEND_I ,  KC_QUOT , KC_COMM,  KC_SLSH  ,
                         LALT_T(KC_LBRC), LCTL_T(KC_LPRN), KC_SPC, TD(TD_SFT),  KC_TAB,            KC_ENT, LGUI_T(S_RCBR),  KC_BSPC,   LT(NAV, KC_RPRN), LT(SYM, S_RBRC)
     ),
@@ -58,7 +58,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [WIN] = LAYOUT(
       _______, _______, _______, _______, _______, _______,                                                 _______, _______, _______, _______, _______, _______ ,
-      _______, LGUI(KC_1), LGUI(KC_2), LGUI(KC_3), LGUI(KC_4), LGUI(KC_5),                                               _______, _______, _______, _______, _______, _______,
+      _______, KC_1, KC_2, KC_3, KC_4, KC_5,                                               _______, _______, _______, _______, _______, _______,
       _______, _______, _______, _______, _______, _______, _______, _______,            _______, _______,  _______, _______, _______, _______, _______ , _______,
                               _______, _______, _______, _______, _______,                              _______, _______, _______, _______, _______
     ),

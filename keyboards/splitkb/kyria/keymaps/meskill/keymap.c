@@ -20,6 +20,7 @@
 #include "macro.h"
 #include "chords.c"
 #include "mod_tap.h"
+#include "mod_hold.h"
 #include "layout.c"
 #include "override.c"
 #include "rgb.h"
@@ -46,6 +47,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (
         !process_lang_switch(keycode, record) ||
         !process_mod_tap(keycode, record) ||
+        !process_mod_hold(keycode, record) ||
         !process_macro(keycode, record) ||
         !process_lang_word(keycode, record)
     ) {
