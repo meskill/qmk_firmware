@@ -20,10 +20,6 @@
 #include "layout.h"
 #include "macro.h"
 
-enum {
-    TD_SFT,
-};
-
 typedef enum {
     TD_NONE,
     TD_UNKNOWN,
@@ -41,6 +37,6 @@ typedef struct {
     td_state_t state;
 } td_tap_t;
 
-td_state_t cur_dance(tap_dance_state_t *state);
+td_state_t cur_dance(tap_dance_state_t *state, bool hold_on_other_key_press);
 
 uint8_t get_dance_mods(void);

@@ -125,7 +125,7 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case LALT_T(KC_LBRC):
         case LCTL_T(KC_LPRN):
-        case TD(TD_SFT):
+        case LSFT_T(S_LCBR):
         case LGUI_T(S_RCBR):
         case LT(NAV, KC_RPRN):
         case LT(SYM, S_RBRC):

@@ -35,6 +35,12 @@ bool process_mod_tap(uint16_t keycode, keyrecord_t *record) {
             code = (mods & MOD_MASK_SHIFT) || is_caps_word_on() ? KC_UNDS : KC_MINS;
             break;
         case LT(MDA, S_QST): {
+            if (!down) {
+                // unregister S_EXL for cases when SHIFT was released before release of
+                // this key leading to the attempt to unregister S_QST instead of S_EXL
+                unregister_code16(S_EXL);
+            }
+
             code = (mods & MOD_MASK_SHIFT) ? S_EXL : S_QST;
             break;
         }
@@ -61,6 +67,7 @@ bool process_mod_tap(uint16_t keycode, keyrecord_t *record) {
             break;
         }
         // mod-tap fix for shift+ralt keycodes
+        case LSFT_T(S_LCBR):
         case LGUI_T(S_RCBR): {
             code = LSFT(RALT(QK_MOD_TAP_GET_TAP_KEYCODE(keycode)));
             break;
