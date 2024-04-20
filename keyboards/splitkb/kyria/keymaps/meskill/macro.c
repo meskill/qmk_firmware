@@ -60,8 +60,7 @@ bool process_macro(uint16_t keycode, keyrecord_t *record) {
             }
             return false;
         case SEND_TBFH:
-            SEND_STRING("::<>");
-            tap_code16(KC_LEFT);
+            SEND_STRING("::<>"SS_TAP(X_LEFT));
             return false;
     }
 
