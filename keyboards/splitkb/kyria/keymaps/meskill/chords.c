@@ -22,6 +22,7 @@
 
 const uint16_t PROGMEM ru_layer[] = {LALT_T(S_LCBR), LT(SYM, S_RBRC), COMBO_END};
 const uint16_t PROGMEM ru_layer_word[] = {KC_SPC, KC_BSPC, COMBO_END};
+const uint16_t PROGMEM caps_word[] = {LSFT_T(S_LCBR), LGUI_T(S_RCBR), COMBO_END};
 const uint16_t PROGMEM ru_yo[] = {RU_SHTI, RU_A, COMBO_END};
 const uint16_t PROGMEM ru_ha[] = {RU_ZE, RU_O, COMBO_END};
 const uint16_t PROGMEM ru_e[] = {RU_ZHE, RU_O, COMBO_END};
@@ -29,6 +30,7 @@ const uint16_t PROGMEM ru_e[] = {RU_ZHE, RU_O, COMBO_END};
 combo_t key_combos[] = {
     [C_RU_LAYER] = COMBO(ru_layer, TG(RU)),
     [C_RU_LAYER_WORD] = COMBO(ru_layer_word, QK_LANG_WORD_TOGGLE),
+    [C_CAPS_WORD] = COMBO(caps_word, QK_CAPS_WORD_TOGGLE),
     [C_RU_YO] = COMBO(ru_yo, RU_YO),
     [C_RU_HA] = COMBO(ru_ha, RU_HA),
     [C_RU_E] = COMBO(ru_e, RU_E),

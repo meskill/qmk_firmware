@@ -18,6 +18,7 @@
 enum combos {
   C_RU_LAYER,
   C_RU_LAYER_WORD,
+  C_CAPS_WORD,
   C_RU_YO,
   C_RU_HA,
   C_RU_E
