@@ -20,7 +20,7 @@
 #include "layout.h"
 
 #ifndef LANG_SWITCH_TIMEOUT
-#    define LANG_SWITCH_TIMEOUT 120000 // default is 2 minutes
+#    define LANG_SWITCH_TIMEOUT 600000 // default is 10 minutes
 #endif
 
 bool process_lang_switch(uint16_t keycode, keyrecord_t *record);
